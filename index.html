@@ -1,0 +1,1041 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casa Daniela · Abbey del Sol · Puerto Morelos Vacation Rental</title>
+<meta name="description" content="Casa Daniela — a spacious ground-floor condo half a block from Puerto Morelos beach, with a rooftop infinity pool overlooking the Caribbean and the mangroves.">
+<style>
+/* ============================================================ tokens */
+:root{
+  --accent:#F4511E;
+  --accent-dark:#D8410F;
+  --ink:#1c1c1c;
+  --body:#3f3f3f;
+  --muted:#767676;
+  --line:#e4e4e4;
+  --line-soft:#efefef;
+  --bg:#ffffff;
+  --surface:#ffffff;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.05);
+  --shadow-md:0 4px 14px rgba(0,0,0,.09), 0 1px 3px rgba(0,0,0,.05);
+  --shadow-lg:0 10px 40px rgba(0,0,0,.14);
+  --r-sm:8px; --r:12px; --r-lg:16px; --r-xl:22px;
+  --maxw:1560px;
+  --font:"Inter","Segoe UI Variable Text","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font);color:var(--ink);background:var(--bg);
+  font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{margin:0;font-weight:600;letter-spacing:-.02em}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ============================================================ header */
+.hdr{
+  position:sticky;top:0;z-index:60;background:rgba(255,255,255,.92);
+  backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line);
+}
+.hdr-in{
+  max-width:var(--maxw);margin:0 auto;padding:0 40px;height:74px;
+  display:flex;align-items:center;gap:32px;
+}
+.logo{display:flex;align-items:center;flex-shrink:0}
+.logo img{height:38px;width:auto}
+.nav{margin-left:auto;display:flex;align-items:center;gap:30px}
+.nav a{font-size:14px;color:var(--body);white-space:nowrap;transition:color .15s}
+.nav a:hover{color:var(--ink)}
+.btn-book{
+  background:var(--accent);color:#fff;font-weight:600;font-size:14.5px;
+  padding:13px 30px;border-radius:999px;transition:background .15s,transform .1s;
+}
+.btn-book:hover{background:var(--accent-dark)}
+.btn-book:active{transform:scale(.985)}
+.nav-toggle{display:none;margin-left:auto;padding:8px}
+
+/* ============================================================ layout */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px 90px}
+.back{
+  display:inline-flex;align-items:center;gap:9px;font-size:13.5px;color:var(--body);
+  padding:26px 0 18px;transition:color .15s;
+}
+.back:hover{color:var(--ink)}
+
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 372px;gap:56px;align-items:start}
+
+/* ============================================================ title */
+.title-row{display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+h1{font-size:33px;line-height:1.15}
+.badge{
+  display:inline-flex;align-items:center;gap:7px;background:#fdf1ec;color:#9c3a12;
+  border:1px solid #f6d9cd;font-size:12.5px;font-weight:600;
+  padding:6px 13px;border-radius:999px;vertical-align:6px;margin-left:14px;
+}
+.sub{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--body);margin-top:8px;flex-wrap:wrap}
+.dot{width:3px;height:3px;border-radius:50%;background:#c4c4c4;flex-shrink:0}
+.rate{display:inline-flex;align-items:center;gap:5px;font-weight:600;color:var(--ink)}
+.rate a{text-decoration:underline;font-weight:500;color:var(--body)}
+.acts{margin-left:auto;display:flex;gap:6px;padding-top:6px}
+.act{
+  display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500;
+  padding:9px 13px;border-radius:var(--r-sm);transition:background .15s;
+}
+.act:hover{background:#f4f4f4}
+
+/* ============================================================ gallery */
+.gallery{margin-bottom:30px}
+.stage{
+  position:relative;border-radius:var(--r-lg);overflow:hidden;background:#e9e9e9;
+  aspect-ratio:16/9;box-shadow:var(--shadow-sm);
+}
+.stage img{
+  width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity .32s ease;position:absolute;inset:0;
+}
+.stage img.on{opacity:1}
+.arw{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:3;
+  width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.94);
+  box-shadow:var(--shadow-md);display:grid;place-items:center;
+  transition:transform .15s,background .15s;
+}
+.arw:hover{background:#fff;transform:translateY(-50%) scale(1.07)}
+.arw.prev{left:16px} .arw.next{right:16px}
+.viewall{
+  position:absolute;right:16px;bottom:16px;z-index:3;
+  display:inline-flex;align-items:center;gap:9px;
+  background:rgba(255,255,255,.96);box-shadow:var(--shadow-md);
+  font-size:13.5px;font-weight:600;padding:11px 17px;border-radius:var(--r-sm);
+  transition:transform .15s;
+}
+.viewall:hover{transform:translateY(-1px)}
+
+.thumbs{
+  position:relative;margin-top:12px;display:flex;gap:11px;
+  overflow-x:auto;scroll-behavior:smooth;padding-bottom:3px;
+  scrollbar-width:none;
+}
+.thumbs::-webkit-scrollbar{display:none}
+.thumbs button{
+  flex:0 0 132px;height:88px;border-radius:10px;overflow:hidden;
+  background:#eee;position:relative;transition:transform .15s;
+}
+.thumbs button img{width:100%;height:100%;object-fit:cover}
+.thumbs button::after{
+  content:"";position:absolute;inset:0;border-radius:10px;
+  box-shadow:inset 0 0 0 0 var(--accent);transition:box-shadow .15s;
+}
+.thumbs button[aria-current="true"]::after{box-shadow:inset 0 0 0 3px var(--accent)}
+.thumbs button:hover{transform:translateY(-2px)}
+.thumb-nav{
+  position:absolute;right:0;top:50%;transform:translateY(-50%);z-index:4;
+  width:34px;height:34px;border-radius:50%;background:#fff;box-shadow:var(--shadow-md);
+  display:grid;place-items:center;
+}
+
+/* ============================================================ facts */
+.facts{
+  /* auto-fit rather than a hard 6 columns: when the assistant docks it steals
+     ~424px of gutter, and six fixed columns overflowed the border. */
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:20px 4px;
+  border:1px solid var(--line);border-radius:var(--r-lg);padding:22px 10px;margin-bottom:38px;
+}
+.fact{display:flex;align-items:center;gap:12px;padding:0 12px}
+.fact svg{flex-shrink:0;color:var(--body)}
+.fact b{display:block;font-size:14px;font-weight:600}
+.fact span{display:block;font-size:12.5px;color:var(--muted);margin-top:1px}
+
+/* ============================================================ about */
+.about{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:44px;align-items:start;
+  padding-bottom:36px;border-bottom:1px solid var(--line)}
+h2{font-size:21px;margin-bottom:15px}
+.about p{color:var(--body);margin:0 0 14px;max-width:62ch}
+.more{color:var(--accent);font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:7px;margin-top:2px}
+.more:hover{text-decoration:underline}
+.hidden-copy{display:none}
+.hidden-copy.show{display:block}
+.checks{border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;background:#fcfcfc}
+.checks li{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--body);padding:8px 0}
+.checks ul{list-style:none;margin:0;padding:0}
+.checks svg{flex-shrink:0;color:var(--accent);margin-top:2px}
+
+/* ============================================================ trust */
+.trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(196px,1fr));gap:26px 22px;padding:34px 0 0}
+.trust div{display:flex;gap:14px;align-items:flex-start}
+.trust svg{flex-shrink:0;color:var(--body);margin-top:1px}
+.trust b{display:block;font-size:14px;font-weight:600}
+.trust span{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+
+/* ============================================================ booking card */
+.rail{position:sticky;top:98px;display:flex;flex-direction:column;gap:20px}
+.card{border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-md);
+  background:var(--surface);padding:24px}
+.price-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.price{font-size:24px;font-weight:600}
+.price em{font-style:normal;font-size:15px;font-weight:400;color:var(--body)}
+.price-row .rate{font-size:13.5px}
+
+.dates{border:1px solid #d4d4d4;border-radius:var(--r);overflow:hidden}
+.dates-top{display:grid;grid-template-columns:1fr 1fr}
+.field{padding:11px 14px;position:relative;min-width:0}
+.field + .field{border-left:1px solid #d4d4d4}
+.dates-top + .guests-field{border-top:1px solid #d4d4d4}
+.field label{display:flex;align-items:center;gap:8px;font-size:10.5px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-bottom:3px}
+.field input,.field select{
+  width:100%;border:0;padding:0;font-size:14px;color:var(--body);background:none;
+  outline:none;font-family:inherit;
+}
+/* Suppress the native select arrow; the .chev svg is the visible one. */
+.field select{appearance:none;-webkit-appearance:none;-moz-appearance:none}
+.field input::-webkit-calendar-picker-indicator{opacity:.45;cursor:pointer}
+.guests-field{display:flex;align-items:center;gap:10px}
+.guests-field .field{flex:1}
+.guests-field > svg{margin-left:14px;flex-shrink:0;color:var(--body)}
+.chev{margin-right:14px;flex-shrink:0;color:var(--body);pointer-events:none}
+
+.cta{
+  width:100%;background:var(--accent);color:#fff;font-weight:600;font-size:16px;
+  padding:15px;border-radius:var(--r);margin-top:16px;transition:background .15s,transform .1s;
+}
+.cta:hover{background:var(--accent-dark)}
+.cta:active{transform:scale(.99)}
+.note{text-align:center;font-size:12.5px;color:var(--muted);margin:11px 0 0}
+.note.cancel{color:var(--body);margin-top:14px;font-size:13px}
+
+.lines{margin-top:20px;padding-top:18px;border-top:1px solid var(--line-soft)}
+.line{display:flex;justify-content:space-between;gap:12px;font-size:14px;color:var(--body);padding:6px 0}
+.line u{text-decoration:underline;text-underline-offset:2px;cursor:help}
+.total{display:flex;justify-content:space-between;font-weight:600;font-size:15px;
+  margin-top:14px;padding-top:16px;border-top:1px solid var(--line)}
+
+/* host card */
+.host{display:flex;gap:14px;align-items:center;margin-bottom:16px}
+.host-av{width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;background:#eee}
+.host b{display:block;font-size:15px}
+.host span{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.host-note{background:#fafafa;border:1px solid var(--line-soft);border-radius:var(--r);padding:16px}
+.host-note p{margin:0 0 11px;font-size:13.5px;color:var(--body)}
+.host-note div{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--muted)}
+
+/* ============================================================ AI widget */
+.ai-fab{
+  position:fixed;right:26px;bottom:26px;z-index:70;
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--ink);color:#fff;font-weight:600;font-size:14.5px;
+  padding:14px 22px;border-radius:999px;box-shadow:var(--shadow-lg);
+  transition:transform .18s,opacity .18s;
+}
+.ai-fab:hover{transform:translateY(-2px)}
+.ai-fab[hidden]{display:none}
+
+.ai{
+  position:fixed;right:26px;bottom:26px;z-index:80;width:352px;
+  /* Fixed height on purpose. The panel must never resize as messages arrive —
+     a panel that grows and shrinks reads as a new window appearing each time.
+     Replies land inside and .ai-body scrolls. */
+  height:min(680px,calc(100vh - 120px));
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);
+  box-shadow:var(--shadow-lg);display:flex;flex-direction:column;overflow:hidden;
+  transform-origin:bottom right;
+}
+.ai-body{min-height:0}
+.ai[hidden]{display:none}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+.ai{animation:pop .22s ease}
+
+/* On wide screens the assistant docks as a third column, as in the reference
+   layout, instead of floating over the booking card. The page gutter widens
+   to make room so nothing is ever covered. */
+@media (min-width:1400px){
+  body.ai-docked .hdr-in,
+  body.ai-docked .wrap,
+  body.ai-docked .ft-in{padding-right:424px}
+  /* Docked, it spans the full column height, as in the reference layout. */
+  body.ai-docked .ai{top:98px;bottom:26px;height:auto}
+}
+
+.ai-hd{display:flex;align-items:flex-start;gap:12px;padding:20px 20px 16px;flex-shrink:0}
+.ai-spark{flex-shrink:0;margin-top:1px}
+.ai-hd b{display:block;font-size:16px;font-weight:600}
+.ai-hd span{display:block;font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.4}
+.ai-x{margin-left:auto;flex-shrink:0;width:30px;height:30px;border-radius:50%;
+  display:grid;place-items:center;color:var(--muted);transition:background .15s}
+.ai-x:hover{background:#f2f2f2;color:var(--ink)}
+
+.ai-body{flex:1 1 auto;overflow-y:auto;padding:4px 20px 8px;scrollbar-width:thin}
+.ai-body::-webkit-scrollbar{width:6px}
+.ai-body::-webkit-scrollbar-thumb{background:#dcdcdc;border-radius:3px}
+
+.chips{display:flex;flex-direction:column;align-items:flex-start;gap:9px;padding-bottom:6px}
+.chip{
+  border:1px solid var(--line);background:#fff;border-radius:var(--r-lg);
+  font-size:13px;color:var(--body);padding:10px 15px;text-align:left;
+  transition:border-color .15s,background .15s,transform .1s;
+}
+.chip:hover{border-color:#c9c9c9;background:#fafafa}
+.chip:active{transform:scale(.98)}
+
+.msg{margin:10px 0;display:flex}
+.msg .bub{
+  /* fit-content so a short reply (or the typing indicator) shrink-wraps
+     instead of stretching to a wide, mostly-empty bar. */
+  width:fit-content;max-width:86%;
+  padding:11px 14px;border-radius:var(--r-lg);font-size:13.5px;
+  line-height:1.55;word-wrap:break-word;overflow-wrap:anywhere;
+}
+.msg.me{justify-content:flex-end}
+.msg.me .bub{background:var(--accent);color:#fff;border-bottom-right-radius:5px}
+/* NB: this role class must never be "ai" — that collides with the panel's own
+   .ai class and every reply would inherit the fixed-position panel styling,
+   rendering each message as a second floating window over the chat. */
+.msg.bot .bub{background:#f3f3f3;color:var(--ink);border-bottom-left-radius:5px}
+.msg.err .bub{background:#fdeeea;color:#9c2a10;border:1px solid #f6d5cb}
+.bub strong{font-weight:600}
+.bub em{font-style:italic}
+.bub code{background:rgba(0,0,0,.06);border-radius:4px;padding:1px 5px;font-size:12.5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.bub a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
+.msg.me .bub a{color:#fff}
+.bub ul,.bub ol{margin:7px 0;padding-left:19px}
+.bub li{margin:3px 0}
+.bub > br:first-child{display:none}
+
+/* Follow-up suggestions shown under the latest answer. */
+.followups{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0 10px}
+.followups .chip{font-size:12.5px;padding:7px 12px;border-radius:999px}
+
+.dots{display:inline-flex;gap:4px;align-items:center;padding:4px 2px}
+.dots i{width:6px;height:6px;border-radius:50%;background:#b0b0b0;animation:bl 1.2s infinite}
+.dots i:nth-child(2){animation-delay:.18s}
+.dots i:nth-child(3){animation-delay:.36s}
+@keyframes bl{0%,60%,100%{opacity:.28;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+
+.ai-ft{padding:12px 16px 16px;flex-shrink:0;border-top:1px solid var(--line-soft)}
+.ai-in{display:flex;align-items:flex-end;gap:8px;border:1px solid var(--line);
+  border-radius:var(--r-xl);padding:7px 7px 7px 16px;transition:border-color .15s}
+.ai-in:focus-within{border-color:#bdbdbd}
+.ai-in textarea{
+  flex:1;border:0;outline:none;resize:none;font-family:inherit;font-size:13.5px;
+  line-height:1.5;max-height:96px;padding:6px 0;background:none;color:var(--ink);
+}
+.ai-send{width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;
+  display:grid;place-items:center;flex-shrink:0;transition:opacity .15s,transform .1s}
+.ai-send:hover{opacity:.85}
+.ai-send:active{transform:scale(.94)}
+.ai-send:disabled{opacity:.32;cursor:not-allowed}
+.ai-dis{text-align:center;font-size:11px;color:#9a9a9a;margin:10px 0 0}
+
+/* ============================================================ lightbox */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(255,255,255,.99);
+  overflow-y:auto;padding:78px 24px 60px}
+.lb[hidden]{display:none}
+.lb-x{position:fixed;top:18px;left:24px;z-index:2;display:inline-flex;align-items:center;gap:9px;
+  font-size:14px;font-weight:600;padding:11px 17px;border-radius:var(--r-sm);
+  background:#fff;box-shadow:var(--shadow-md)}
+.lb-grid{max-width:940px;margin:0 auto;columns:2;column-gap:14px}
+.lb-grid img{width:100%;margin-bottom:14px;border-radius:var(--r);break-inside:avoid}
+
+/* ============================================================ footer */
+.ft{border-top:1px solid var(--line);background:#fafafa;padding:44px 0}
+.ft-in{max-width:var(--maxw);margin:0 auto;padding:0 40px;display:flex;
+  gap:28px;align-items:center;flex-wrap:wrap;font-size:13.5px;color:var(--muted)}
+.ft-in a:hover{color:var(--ink);text-decoration:underline}
+.ft-in .sep{margin-left:auto}
+
+/* ============================================================ responsive */
+@media (max-width:1180px){
+  .grid{grid-template-columns:minmax(0,1fr) 340px;gap:36px}
+  .facts{grid-template-columns:repeat(3,1fr);row-gap:20px}
+  .hdr-in,.wrap,.ft-in{padding-left:28px;padding-right:28px}
+}
+@media (max-width:960px){
+  .nav{display:none}
+  .nav-toggle{display:inline-grid;place-items:center}
+  /* minmax(0,...) not 1fr: a bare 1fr floors at min-content, and the 23-item
+     thumbnail strip's min-content is ~2600px, which blew the page out sideways. */
+  .grid{grid-template-columns:minmax(0,1fr);gap:34px}
+  .rail{position:static}
+  .about{grid-template-columns:minmax(0,1fr);gap:26px}
+  .trust{grid-template-columns:repeat(2,1fr);gap:22px}
+  h1{font-size:27px}
+  .lb-grid{columns:1}
+}
+@media (max-width:640px){
+  .hdr-in,.wrap,.ft-in{padding-left:18px;padding-right:18px}
+  .hdr-in{height:64px}
+  .logo img{height:32px}
+  .facts{grid-template-columns:repeat(2,1fr)}
+  .acts{margin-left:0;width:100%;padding-top:0}
+  .badge{margin-left:0;margin-top:10px;vertical-align:0}
+  .title-row{gap:10px}
+  .stage{aspect-ratio:4/3;border-radius:var(--r)}
+  .thumbs button{flex-basis:104px;height:72px}
+  .trust{grid-template-columns:1fr}
+  .ai{right:0;bottom:0;width:100%;height:88vh;border-radius:var(--r-xl) var(--r-xl) 0 0;
+      border-left:0;border-right:0;border-bottom:0}
+  .ai-fab{right:16px;bottom:16px}
+  .wrap{padding-bottom:70px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<!-- ==================================================== header -->
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="logo" href="#" aria-label="Abbey del Sol home">
+      <img src="assets/logo.jpg" alt="Abbey del Sol">
+    </a>
+    <nav class="nav">
+      <a href="#stay">Vacation Rentals</a>
+      <a href="#area">Around Puerto Morelos</a>
+      <a href="#getting-here">Transportation</a>
+      <a href="#gallery">Photo Gallery</a>
+      <a href="#" data-ai-open>Questions?</a>
+      <button class="btn-book" data-scroll="#book">Book Now</button>
+    </nav>
+    <button class="nav-toggle" aria-label="Open menu" data-ai-open>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="wrap">
+  <a class="back" href="#">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    Back to listings
+  </a>
+
+  <div class="grid">
+    <!-- =============================== left column -->
+    <div>
+      <div class="title-row">
+        <div>
+          <h1>
+            Casa Daniela
+            <span class="badge">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 5.3 5.6.6-4.2 3.9 1.2 5.6L12 14.6 6.9 17.4l1.2-5.6L4 7.9l5.6-.6L12 2z"/></svg>
+              Superhost
+            </span>
+          </h1>
+          <div class="sub">
+            <span>Puerto Morelos, Quintana Roo, Mexico</span>
+            <i class="dot"></i>
+            <span class="rate">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+              4.9 <a href="#">(64 reviews)</a>
+            </span>
+          </div>
+        </div>
+        <div class="acts">
+          <button class="act">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7M12 3v13M8 7l4-4 4 4"/></svg>
+            Share
+          </button>
+          <button class="act" data-save>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5.1 5.1 0 00-7.2 0L12 7.2l-1.6-1.6a5.1 5.1 0 00-7.2 7.2l8.8 8.8 8.8-8.8a5.1 5.1 0 000-7.2z"/></svg>
+            <span>Save</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- =============================== gallery -->
+      <section class="gallery" id="gallery">
+        <div class="stage" id="stage">
+          <button class="arw prev" id="prev" aria-label="Previous photo">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="arw next" id="next" aria-label="Next photo">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+          <button class="viewall" id="viewall">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/></svg>
+            View all photos
+          </button>
+        </div>
+        <div style="position:relative">
+          <div class="thumbs" id="thumbs"></div>
+          <button class="thumb-nav" id="thumbNext" aria-label="More photos">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- =============================== facts -->
+      <section class="facts" id="stay">
+        <div class="fact">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20a6.5 6.5 0 0113 0M17 11.2a3 3 0 100-6M18.5 20a6.2 6.2 0 00-3-5.3"/></svg>
+          <div><b>6 Guests</b><span>Max capacity</span></div>
+        </div>
+        <div class="fact">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 18v-7a2 2 0 012-2h16a2 2 0 012 2v7M2 18h20M2 18v2M22 18v2M6 9V6.5A1.5 1.5 0 017.5 5h9A1.5 1.5 0 0118 6.5V9"/></svg>
+          <div><b>2 Bedrooms</b><span>1 King, 1 Full</span></div>
+        </div>
+        <div class="fact">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 12h18v3a4 4 0 01-4 4H7a4 4 0 01-4-4v-3zM6 12V6a2 2 0 012-2h.5A1.5 1.5 0 0110 5.5M7 19l-1.5 2M17 19l1.5 2"/></svg>
+          <div><b>2.5 Bathrooms</b><span>Towels supplied</span></div>
+        </div>
+        <div class="fact">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 8.5a15 15 0 0120 0M5 12a10.5 10.5 0 0114 0M8.5 15.4a5.5 5.5 0 017 0"/><circle cx="12" cy="19" r="1.1" fill="currentColor"/></svg>
+          <div><b>Free Wi-Fi</b><span>High speed</span></div>
+        </div>
+        <div class="fact">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="2.5" y="4.5" width="19" height="10" rx="2"/><path d="M6 18c1.2 0 1.2 1.6 2.4 1.6M11 18c1.2 0 1.2 1.6 2.4 1.6M16 18c1.2 0 1.2 1.6 2.4 1.6M6 8.5h12M6 11.2h12"/></svg>
+          <div><b>Air conditioning</b><span>Throughout</span></div>
+        </div>
+        <div class="fact">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 17.5c1.8 0 1.8 1.6 3.6 1.6s1.8-1.6 3.6-1.6 1.8 1.6 3.6 1.6 1.8-1.6 3.6-1.6 1.8 1.6 3.6 1.6M2 12.8c1.8 0 1.8 1.6 3.6 1.6s1.8-1.6 3.6-1.6 1.8 1.6 3.6 1.6 1.8-1.6 3.6-1.6 1.8 1.6 3.6 1.6M7 10V6a2 2 0 012-2M14 10V6a2 2 0 012-2"/></svg>
+          <div><b>Rooftop pool</b><span>Infinity edge</span></div>
+        </div>
+      </section>
+
+      <!-- =============================== about -->
+      <section class="about">
+        <div>
+          <h2>About this space</h2>
+          <p>Welcome to Casa Daniela, a spacious ground-floor condo half a block from the beach and a short stroll from the Puerto Morelos town square. One of the larger units in the Abbey del Sol collection, it was our featured Vacation Rental of the Month and suits families, couples and remote workers equally well.</p>
+          <p>The king bedroom has a new plush bed with 500-thread-count sheets, and a second bedroom sleeps two more. A queen sleeper sofa in the living area brings the total to six. Air conditioning runs throughout, and the washer and dryer are right in the unit.</p>
+          <div class="hidden-copy" id="moreCopy">
+            <p>Head up to the rooftop patio for panoramic views over the Caribbean Sea and the mangrove forest. Take a dip in the infinity pool, stretch out on a lounger, or eat under the palapa as the sun goes down. Free bikes are included, so exploring town is easy.</p>
+            <p>Our office is three blocks away and open 8 a.m. to 5 p.m. daily. The team is bilingual and can arrange airport transfers, reef snorkelling, cenote trips and tours to Tulum, Ek Balam or Chichén Itzá. Guests staying eight nights or more get a complimentary mid-stay clean.</p>
+          </div>
+          <button class="more" id="moreBtn">
+            <span>Show more</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" id="moreChev"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+        </div>
+        <aside class="checks">
+          <ul>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Private garden patio</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Rooftop infinity pool</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Fully equipped kitchen</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Washer &amp; dryer in unit</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Free bikes for guests</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Beach chairs &amp; towels</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Flat-screen Smart TV</li>
+          </ul>
+        </aside>
+      </section>
+
+      <!-- =============================== trust -->
+      <section class="trust" id="area">
+        <div>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s7-5.6 7-11a7 7 0 10-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          <div><b>Prime location</b><span>Half a block to the beach</span></div>
+        </div>
+        <div id="getting-here">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="2.5" width="16" height="19" rx="2"/><path d="M9 2.5v19"/><circle cx="14.5" cy="12" r="1.1" fill="currentColor"/></svg>
+          <div><b>Office check-in</b><span>Three blocks away, 8am–5pm</span></div>
+        </div>
+        <div>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 8.5a15 15 0 0120 0M5 12a10.5 10.5 0 0114 0M8.5 15.4a5.5 5.5 0 017 0"/><circle cx="12" cy="19" r="1.1" fill="currentColor"/></svg>
+          <div><b>Fast Wi-Fi</b><span>Free in every property</span></div>
+        </div>
+        <div>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 13a8 8 0 0116 0M4 13v3.5a2 2 0 002 2h1v-6H6a2 2 0 00-2 2zM20 13v3.5a2 2 0 01-2 2h-1v-6h1a2 2 0 012 2z"/></svg>
+          <div><b>Bilingual team</b><span>English and Spanish</span></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- =============================== right rail -->
+    <aside class="rail" id="book">
+      <!--
+        PLACEHOLDER PRICING.
+        No real nightly rates exist in the crawled site data — Abbey del Sol keeps
+        rates behind their Escapia booking system. Swap the four numbers below
+        (and the total) for real figures when you have them.
+      -->
+      <div class="card">
+        <div class="price-row">
+          <div class="price">$30 <em>/ night</em></div>
+          <span class="rate">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+            4.9 <a href="#">(64 reviews)</a>
+          </span>
+        </div>
+
+        <div class="dates">
+          <div class="dates-top">
+            <div class="field">
+              <label>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+                Check-in
+              </label>
+              <input type="date" id="cin" aria-label="Check-in date">
+            </div>
+            <div class="field">
+              <label>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+                Check-out
+              </label>
+              <input type="date" id="cout" aria-label="Check-out date">
+            </div>
+          </div>
+          <div class="guests-field">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20a6.5 6.5 0 0113 0M17 11.2a3 3 0 100-6M18.5 20a6.2 6.2 0 00-3-5.3"/></svg>
+            <div class="field">
+              <label>Guests</label>
+              <select id="guests" aria-label="Number of guests">
+                <option>1 guest</option>
+                <option selected>2 guests</option>
+                <option>3 guests</option>
+                <option>4 guests</option>
+                <option>5 guests</option>
+                <option>6 guests</option>
+              </select>
+            </div>
+            <svg class="chev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+        </div>
+
+        <button class="cta" data-ai-open data-ai-ask="I'd like to check availability for Casa Daniela.">Check availability</button>
+        <p class="note">You won't be charged yet</p>
+        <p class="note cancel">Free cancellation up to 60 days before arrival</p>
+
+        <div class="lines">
+          <div class="line"><u>$30 × 1 night</u><span>$30</span></div>
+          <div class="line"><u>Cleaning fee</u><span>$30</span></div>
+          <div class="line"><u>Service fee</u><span>$10</span></div>
+          <div class="line"><u>Taxes</u><span>$6</span></div>
+          <div class="total"><span>Total</span><span>$76 USD</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="host">
+          <img class="host-av" src="assets/photos/23-garden-patio-dining.jpg" alt="">
+          <div>
+            <b>Hosted by Abbey del Sol</b>
+            <span>Superhost · Puerto Morelos since 2005</span>
+          </div>
+        </div>
+        <div class="host-note">
+          <p>Jin, Nancy and the team have looked after guests here for two decades. Ask us anything before you book.</p>
+          <div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v5l3.2 2"/></svg>
+            Office open 8am–5pm, every day
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="ft">
+  <div class="ft-in">
+    <span>© <span id="yr"></span> Abbey del Sol · Puerto Morelos, Quintana Roo, Mexico</span>
+    <span class="sep"><a href="#" data-ai-open>Questions?</a></span>
+    <a href="tel:+529981152244">+52 998 115 2244</a>
+  </div>
+</footer>
+
+<!-- ==================================================== lightbox -->
+<div class="lb" id="lb" hidden>
+  <button class="lb-x" id="lbx">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    Close
+  </button>
+  <div class="lb-grid" id="lbGrid"></div>
+</div>
+
+<!-- ==================================================== AI widget -->
+<button class="ai-fab" id="aiFab">
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.9 5.4L19 9.3l-5.1 1.9L12 16.6l-1.9-5.4L5 9.3l5.1-1.9L12 2z"/><path d="M18.5 14l.85 2.4 2.4.85-2.4.85-.85 2.4-.85-2.4-2.4-.85 2.4-.85.85-2.4z" opacity=".65"/></svg>
+  Ask Abbey AI
+</button>
+
+<section class="ai" id="ai" hidden aria-label="Ask Abbey AI">
+  <header class="ai-hd">
+    <svg class="ai-spark" width="24" height="24" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 2l1.9 5.4L19 9.3l-5.1 1.9L12 16.6l-1.9-5.4L5 9.3l5.1-1.9L12 2z"/><path d="M18.5 14l.85 2.4 2.4.85-2.4.85-.85 2.4-.85-2.4-2.4-.85 2.4-.85.85-2.4z" opacity=".6"/></svg>
+    <div>
+      <b>Ask Abbey AI</b>
+      <span>Your travel assistant for Casa Daniela</span>
+    </div>
+    <button class="ai-x" id="aiClose" aria-label="Close assistant">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </header>
+
+  <div class="ai-body" id="aiBody">
+    <div class="chips" id="chips">
+      <button class="chip">Is the pool shared or private?</button>
+      <button class="chip">How far is the beach?</button>
+      <button class="chip">What time is check-in?</button>
+      <button class="chip">How do I get here from Cancún airport?</button>
+      <button class="chip">What's the cancellation policy?</button>
+      <button class="chip">Do you have anything bigger for 8 people?</button>
+    </div>
+  </div>
+
+  <footer class="ai-ft">
+    <div class="ai-in">
+      <textarea id="aiText" rows="1" placeholder="Ask anything about your stay…"></textarea>
+      <button class="ai-send" id="aiSend" aria-label="Send message">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2.5L11 13M21.5 2.5l-6.8 19-3.7-8.5L2.5 9.3l19-6.8z"/></svg>
+      </button>
+    </div>
+    <p class="ai-dis">AI responses may not always be accurate.</p>
+  </footer>
+</section>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================================================ gallery */
+const PHOTOS = [
+  ["01-living-room-entry","Living room and entry"],
+  ["02-living-kitchen-open-plan","Open-plan living and kitchen"],
+  ["03-dining-teal-chairs","Dining area"],
+  ["04-kitchen-island-living","Kitchen island"],
+  ["05-breakfast-bar","Breakfast bar"],
+  ["06-kitchen-dining-table","Kitchen and dining table"],
+  ["07-kitchen-full","Fully equipped kitchen"],
+  ["08-king-bedroom-swans","King bedroom"],
+  ["09-bedroom-garden-view","Bedroom with garden view"],
+  ["10-bedroom-terrace-doors","Bedroom terrace doors"],
+  ["11-second-bedroom","Second bedroom"],
+  ["12-bedroom-ensuite","Bedroom with en-suite"],
+  ["13-bedroom-shelving","Bedroom shelving"],
+  ["14-living-credenza-tv","Living area and Smart TV"],
+  ["15-bathroom-round-mirror","Bathroom"],
+  ["16-bathroom-vanity","Bathroom vanity"],
+  ["17-bathroom-shower","Bathroom and shower"],
+  ["18-bathroom-glass-shower","Walk-in shower"],
+  ["19-rooftop-infinity-pool","Rooftop infinity pool"],
+  ["20-rooftop-pool-pergola","Rooftop pool and pergola"],
+  ["21-rooftop-loungers","Rooftop loungers"],
+  ["22-rooftop-palapa-dining","Rooftop palapa dining"],
+  ["23-garden-patio-dining","Private garden patio"]
+];
+const src = n => "assets/photos/" + n + ".jpg";
+
+const stage = document.getElementById("stage");
+const thumbs = document.getElementById("thumbs");
+let idx = 0;
+
+const slides = PHOTOS.map(function(p, i){
+  const img = new Image();
+  img.src = src(p[0]);
+  img.alt = p[1] + " at Casa Daniela";
+  if (i === 0) { img.className = "on"; img.fetchPriority = "high"; }
+  else { img.loading = "lazy"; }
+  stage.insertBefore(img, stage.firstChild);
+  return img;
+});
+
+PHOTOS.forEach(function(p, i){
+  const b = document.createElement("button");
+  b.innerHTML = '<img src="' + src(p[0]) + '" alt="' + p[1] + '" loading="lazy">';
+  b.setAttribute("aria-current", i === 0 ? "true" : "false");
+  b.addEventListener("click", function(){ show(i); });
+  thumbs.appendChild(b);
+});
+
+function show(n){
+  idx = (n + PHOTOS.length) % PHOTOS.length;
+  slides.forEach(function(s, i){ s.classList.toggle("on", i === idx); });
+  const btns = thumbs.children;
+  for (let i = 0; i < btns.length; i++) {
+    btns[i].setAttribute("aria-current", i === idx ? "true" : "false");
+  }
+  btns[idx].scrollIntoView({ block: "nearest", inline: "nearest" });
+}
+
+document.getElementById("prev").addEventListener("click", function(){ show(idx - 1); });
+document.getElementById("next").addEventListener("click", function(){ show(idx + 1); });
+document.getElementById("thumbNext").addEventListener("click", function(){
+  thumbs.scrollBy({ left: 300, behavior: "smooth" });
+});
+
+// Swipe on touch devices.
+let tx = null;
+stage.addEventListener("touchstart", function(e){ tx = e.changedTouches[0].clientX; }, { passive:true });
+stage.addEventListener("touchend", function(e){
+  if (tx === null) return;
+  const d = e.changedTouches[0].clientX - tx;
+  if (Math.abs(d) > 45) show(idx + (d < 0 ? 1 : -1));
+  tx = null;
+}, { passive:true });
+
+/* ============================================================ lightbox */
+const lb = document.getElementById("lb");
+const lbGrid = document.getElementById("lbGrid");
+let lbBuilt = false;
+
+function openLb(){
+  if (!lbBuilt) {
+    PHOTOS.forEach(function(p){
+      const im = new Image();
+      im.src = src(p[0]);
+      im.alt = p[1] + " at Casa Daniela";
+      im.loading = "lazy";
+      lbGrid.appendChild(im);
+    });
+    lbBuilt = true;
+  }
+  lb.hidden = false;
+  document.body.style.overflow = "hidden";
+}
+function closeLb(){ lb.hidden = true; document.body.style.overflow = ""; }
+
+document.getElementById("viewall").addEventListener("click", openLb);
+document.getElementById("lbx").addEventListener("click", closeLb);
+
+/* ============================================================ misc UI */
+document.getElementById("yr").textContent = new Date().getFullYear();
+
+const moreBtn = document.getElementById("moreBtn");
+moreBtn.addEventListener("click", function(){
+  const open = document.getElementById("moreCopy").classList.toggle("show");
+  moreBtn.querySelector("span").textContent = open ? "Show less" : "Show more";
+  document.getElementById("moreChev").style.transform = open ? "rotate(180deg)" : "";
+});
+
+document.querySelector("[data-save]").addEventListener("click", function(){
+  const on = this.classList.toggle("saved");
+  this.querySelector("svg").setAttribute("fill", on ? "var(--accent)" : "none");
+  this.querySelector("svg").setAttribute("stroke", on ? "var(--accent)" : "currentColor");
+  this.querySelector("span").textContent = on ? "Saved" : "Save";
+});
+
+document.querySelectorAll("[data-scroll]").forEach(function(el){
+  el.addEventListener("click", function(){
+    document.querySelector(el.dataset.scroll).scrollIntoView({ behavior:"smooth", block:"start" });
+  });
+});
+
+// Sensible default dates: a week out, three nights.
+(function(){
+  const iso = d => d.toISOString().slice(0, 10);
+  const a = new Date(); a.setDate(a.getDate() + 7);
+  const b = new Date(a); b.setDate(b.getDate() + 3);
+  const cin = document.getElementById("cin"), cout = document.getElementById("cout");
+  cin.min = iso(new Date()); cin.value = iso(a);
+  cout.min = iso(a); cout.value = iso(b);
+  cin.addEventListener("change", function(){ cout.min = cin.value; });
+})();
+
+/* ============================================================ AI widget */
+const ai      = document.getElementById("ai");
+const aiFab   = document.getElementById("aiFab");
+const aiBody  = document.getElementById("aiBody");
+const aiText  = document.getElementById("aiText");
+const aiSend  = document.getElementById("aiSend");
+const chips   = document.getElementById("chips");
+
+// Full transcript, sent to the proxy so the assistant keeps context.
+const history = [];
+let busy = false;
+
+const DOCK = window.matchMedia("(min-width:1400px)");
+
+function openAi(prefill, silent){
+  ai.hidden = false;
+  aiFab.hidden = true;
+  document.body.classList.toggle("ai-docked", DOCK.matches);
+  if (prefill) { aiText.value = prefill; autoGrow(); }
+  if (!silent) setTimeout(function(){ aiText.focus(); }, 60);
+}
+function closeAi(){
+  ai.hidden = true;
+  aiFab.hidden = false;
+  document.body.classList.remove("ai-docked");
+}
+
+// Open by default on wide screens so the assistant is visible on arrival.
+if (DOCK.matches) openAi("", true);
+DOCK.addEventListener("change", function(){
+  if (!ai.hidden) document.body.classList.toggle("ai-docked", DOCK.matches);
+});
+
+aiFab.addEventListener("click", function(){ openAi(); });
+document.getElementById("aiClose").addEventListener("click", closeAi);
+document.querySelectorAll("[data-ai-open]").forEach(function(el){
+  el.addEventListener("click", function(e){
+    e.preventDefault();
+    openAi(el.dataset.aiAsk || "");
+  });
+});
+
+document.addEventListener("keydown", function(e){
+  if (e.key !== "Escape") return;
+  if (!lb.hidden) return closeLb();
+  if (!ai.hidden) return closeAi();
+});
+
+// Claude replies in markdown. Escape the text first, then convert the small
+// subset that actually shows up in these answers, so guests never see raw
+// ** asterisks ** in the chat.
+function md(raw){
+  let s = String(raw)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+  s = s.replace(/`([^`\n]+)`/g, "<code>$1</code>");
+  s = s.replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>");
+  s = s.replace(/(^|[\s(])\*([^*\n]+)\*(?=[\s.,!?)]|$)/g, "$1<em>$2</em>");
+  s = s.replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g,
+    '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+
+  // Group consecutive "- " or "1. " lines into real lists.
+  const lines = s.split("\n");
+  let out = "", list = null;
+  for (const line of lines) {
+    const ul = line.match(/^\s*[-•]\s+(.*)$/);
+    const ol = line.match(/^\s*\d+[.)]\s+(.*)$/);
+    if (ul || ol) {
+      const want = ul ? "ul" : "ol";
+      if (list !== want) { if (list) out += "</" + list + ">"; out += "<" + want + ">"; list = want; }
+      out += "<li>" + (ul ? ul[1] : ol[1]) + "</li>";
+    } else {
+      if (list) { out += "</" + list + ">"; list = null; }
+      out += line + "\n";
+    }
+  }
+  if (list) out += "</" + list + ">";
+
+  return out.trim().replace(/\n{2,}/g, "<br><br>").replace(/\n/g, "<br>");
+}
+
+function bubble(role, text){
+  const wrap = document.createElement("div");
+  wrap.className = "msg " + role;
+  const b = document.createElement("div");
+  b.className = "bub";
+  if (role === "bot") b.innerHTML = md(text);
+  else b.textContent = text;
+  wrap.appendChild(b);
+  aiBody.appendChild(wrap);
+  aiBody.scrollTop = aiBody.scrollHeight;
+  return b;
+}
+
+function thinking(){
+  const wrap = document.createElement("div");
+  wrap.className = "msg bot";
+  wrap.innerHTML = '<div class="bub"><span class="dots"><i></i><i></i><i></i></span></div>';
+  aiBody.appendChild(wrap);
+  aiBody.scrollTop = aiBody.scrollHeight;
+  return wrap;
+}
+
+async function ask(text){
+  text = (text || "").trim();
+  if (!text || busy) return;
+
+  busy = true;
+  aiSend.disabled = true;
+  chips.style.display = "none";
+  const stale = aiBody.querySelector(".followups");
+  if (stale) stale.remove();
+
+  bubble("me", text);
+  history.push({ role: "user", content: text });
+  aiText.value = "";
+  autoGrow();
+
+  const wait = thinking();
+
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: history })
+    });
+
+    // On a static host (GitHub Pages) there is no /api/chat, so the response is
+    // a 404 HTML page rather than JSON. Detect that and say something a visitor
+    // can actually understand.
+    const raw = await res.text();
+    let data = null;
+    try { data = JSON.parse(raw); } catch (_) {}
+    wait.remove();
+
+    if (!data) {
+      bubble("err", "This is a static preview, so the live assistant isn't connected here. " +
+        "For anything about your stay, the Abbey del Sol office is open 8am–5pm daily, " +
+        "or call +52 998 115 2244.");
+    } else if (!res.ok) {
+      bubble("err", data.error || "Something went wrong. Please try again.");
+    } else {
+      bubble("bot", data.reply);
+      history.push({ role: "assistant", content: data.reply });
+      showFollowups();
+    }
+  } catch (err) {
+    wait.remove();
+    bubble("err", "Can't reach the assistant right now. Please try again in a moment, " +
+      "or contact the office on +52 998 115 2244.");
+  } finally {
+    busy = false;
+    aiSend.disabled = false;
+    aiText.focus();
+  }
+}
+
+// Questions the guest hasn't asked yet, offered under the latest answer.
+const POOL = [
+  "How far is the beach?",
+  "What time is check-in?",
+  "Is the pool shared or private?",
+  "How do I get here from Cancún airport?",
+  "What's the cancellation policy?",
+  "Do you have anything bigger for 8 people?",
+  "What's included in the kitchen?",
+  "Are bikes included?",
+  "What's the weather like in December?",
+  "Is there a market or grocery store nearby?"
+];
+
+function showFollowups(){
+  const prev = aiBody.querySelector(".followups");
+  if (prev) prev.remove();
+
+  const asked = history.filter(m => m.role === "user").map(m => m.content.toLowerCase());
+  const next = POOL.filter(q => !asked.includes(q.toLowerCase())).slice(0, 3);
+  if (!next.length) return;
+
+  const row = document.createElement("div");
+  row.className = "followups";
+  next.forEach(function(q){
+    const b = document.createElement("button");
+    b.className = "chip";
+    b.textContent = q;
+    row.appendChild(b);
+  });
+  aiBody.appendChild(row);
+  aiBody.scrollTop = aiBody.scrollHeight;
+}
+
+aiBody.addEventListener("click", function(e){
+  const c = e.target.closest(".chip");
+  if (c) ask(c.textContent);
+});
+
+aiSend.addEventListener("click", function(){ ask(aiText.value); });
+
+aiText.addEventListener("keydown", function(e){
+  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); ask(aiText.value); }
+});
+
+function autoGrow(){
+  aiText.style.height = "auto";
+  aiText.style.height = Math.min(aiText.scrollHeight, 96) + "px";
+}
+aiText.addEventListener("input", autoGrow);
+
+})();
+</script>
+</body>
+</html>
