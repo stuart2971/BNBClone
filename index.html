@@ -689,6 +689,8 @@ h2{font-size:21px;margin-bottom:15px}
   </footer>
 </section>
 
+<script src="assets/chat-config.js"></script>
+<script src="assets/concierge.js"></script>
 <script>
 (function(){
 "use strict";
@@ -844,6 +846,8 @@ const DOCK = window.matchMedia("(min-width:1400px)");
 function openAi(prefill, silent){
   ai.hidden = false;
   aiFab.hidden = true;
+  // Index the knowledge base now so the first answer doesn't wait on it.
+  if (window.AbbeyConcierge) AbbeyConcierge.warm();
   document.body.classList.toggle("ai-docked", DOCK.matches);
   if (prefill) { aiText.value = prefill; autoGrow(); }
   if (!silent) setTimeout(function(){ aiText.focus(); }, 60);
@@ -930,6 +934,43 @@ function thinking(){
   return wrap;
 }
 
+// Where answers come from.
+//
+// A configured endpoint (assets/chat-config.js) or a local `node server.js`
+// both give Claude-backed answers. GitHub Pages has neither — it is a static
+// host and cannot keep an API key secret — so there the widget answers from
+// knowledge-base.md in the browser, via assets/concierge.js.
+const CHAT_ENDPOINT = (function(){
+  const configured = ((window.ABBEY_CHAT && window.ABBEY_CHAT.endpoint) || "").trim();
+  if (configured) return configured;
+  return /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) ? "/api/chat" : "";
+})();
+
+// Resolves to the reply text. Rejects with {soft:true} when the endpoint just
+// isn't there, meaning "fall back to the local concierge"; rejects with a
+// message meant for the guest when the proxy itself reports a real problem.
+async function askRemote(endpoint){
+  let res;
+  try {
+    res = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: history })
+    });
+  } catch (_) {
+    throw { soft: true };  // offline, DNS, CORS
+  }
+
+  const raw = await res.text();
+  let data = null;
+  try { data = JSON.parse(raw); } catch (_) {}
+
+  // A static host answers /api/chat with a 404 HTML page rather than JSON.
+  if (!data) throw { soft: true };
+  if (!res.ok) throw { message: data.error || "Something went wrong. Please try again." };
+  return data.reply;
+}
+
 async function ask(text){
   text = (text || "").trim();
   if (!text || busy) return;
@@ -946,37 +987,37 @@ async function ask(text){
   autoGrow();
 
   const wait = thinking();
+  let reply = null, problem = null;
 
   try {
-    const res = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages: history })
-    });
+    if (CHAT_ENDPOINT) {
+      try {
+        reply = await askRemote(CHAT_ENDPOINT);
+      } catch (err) {
+        // Only a real, reportable failure stops us; anything else falls
+        // through to the local concierge below.
+        if (err && !err.soft) problem = err.message;
+      }
+    }
 
-    // On a static host (GitHub Pages) there is no /api/chat, so the response is
-    // a 404 HTML page rather than JSON. Detect that and say something a visitor
-    // can actually understand.
-    const raw = await res.text();
-    let data = null;
-    try { data = JSON.parse(raw); } catch (_) {}
+    if (reply === null && problem === null) {
+      try {
+        reply = await AbbeyConcierge.answer(text);
+      } catch (_) {
+        problem = "I can't pull up those details right now. Please try again in a moment, " +
+          "or contact the office on +52 998 115 2244.";
+      }
+    }
+
     wait.remove();
 
-    if (!data) {
-      bubble("err", "This is a static preview, so the live assistant isn't connected here. " +
-        "For anything about your stay, the Abbey del Sol office is open 8am–5pm daily, " +
-        "or call +52 998 115 2244.");
-    } else if (!res.ok) {
-      bubble("err", data.error || "Something went wrong. Please try again.");
+    if (problem) {
+      bubble("err", problem);
     } else {
-      bubble("bot", data.reply);
-      history.push({ role: "assistant", content: data.reply });
+      bubble("bot", reply);
+      history.push({ role: "assistant", content: reply });
       showFollowups();
     }
-  } catch (err) {
-    wait.remove();
-    bubble("err", "Can't reach the assistant right now. Please try again in a moment, " +
-      "or contact the office on +52 998 115 2244.");
   } finally {
     busy = false;
     aiSend.disabled = false;

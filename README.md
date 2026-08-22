@@ -8,8 +8,13 @@ abbey-del-sol/
 ├── index.html          the whole page — markup, styles, behaviour
 ├── knowledge-base.md   everything the AI knows (edit this, not the code)
 ├── server.js           static host + Anthropic proxy, zero dependencies
+├── api/chat.js         the same proxy as a serverless function
+├── lib/prompt.js       system prompt + Anthropic call, shared by both
 ├── .env.example        copy to .env and paste your key
+├── .nojekyll           stops GitHub Pages preprocessing knowledge-base.md
 └── assets/
+    ├── chat-config.js  where the widget sends messages (empty = static mode)
+    ├── concierge.js    in-browser fallback that answers from knowledge-base.md
     ├── logo.jpg
     └── photos/         23 Casa Daniela photos
 ```
@@ -58,22 +63,48 @@ at higher cost.
 
 ## GitHub Pages
 
-The page is deployed to GitHub Pages, but **Pages is a static host and cannot run
-`server.js`**. There is no `/api/chat` endpoint there, so the assistant replies
-with a "static preview" notice pointing guests at the office instead. Everything
-else — gallery, lightbox, booking card, responsive layout — works normally.
+**Pages is a static host.** It cannot run `server.js`, and it cannot keep an
+`ANTHROPIC_API_KEY` secret — anything committed to this repo is public. So the
+widget has two back ends and picks whichever is available:
 
-To get a working assistant on a public URL, host it somewhere that runs server
-code. The proxy is ~40 lines and ports directly to a serverless function:
+```
+  endpoint configured in assets/chat-config.js?
+  │
+  ├─ yes ──> POST to the proxy ──> api.anthropic.com
+  │          (server.js locally, api/chat.js hosted)
+  │
+  └─ no ───> assets/concierge.js answers in the browser
+             from knowledge-base.md, no API key needed
+```
 
-| Host | What to do |
-|---|---|
-| Vercel | Move the handler to `api/chat.js`, set `ANTHROPIC_API_KEY` as an env var |
-| Netlify | Same, as `netlify/functions/chat.js` |
-| Cloudflare Workers | Same logic, key as a Worker secret |
-| Any VPS / Render / Railway | Run `node server.js` unchanged |
+On Pages, no endpoint is configured, so guests get the in-browser concierge:
+it fetches `knowledge-base.md`, indexes it by section, and answers from the
+best-matching section. It follows the same rules as the Claude prompt — it never
+invents rates, it won't promise the rooftop pool is private, and anything section
+8 lists as unknown gets handed to the office instead of guessed at. Sections
+written *to* the assistant rather than to a guest are stripped out before
+anything is shown.
 
-Keep the key in the host's environment variables. Never put it in the client.
+`knowledge-base.md` stays the single source of truth for both paths. Edit it and
+the answers change, with no code changes either way.
+
+### Switching Pages over to real Claude answers
+
+1. Deploy this repo somewhere that runs server code — `api/chat.js` and
+   `vercel.json` are ready for Vercel as-is.
+2. Set `ANTHROPIC_API_KEY` in that host's environment settings.
+3. Put the function URL in `assets/chat-config.js`:
+
+   ```js
+   window.ABBEY_CHAT = { endpoint: "https://your-app.vercel.app/api/chat" };
+   ```
+
+The widget will use the proxy and quietly fall back to the local concierge if it
+is ever unreachable, so the page never shows a guest a dead assistant. **Never
+put the API key in `chat-config.js`** — that file ships to the browser.
+
+Running `node server.js` locally needs no config: on `localhost` the widget tries
+`/api/chat` on its own.
 
 ## Things to change before this goes live
 
@@ -93,9 +124,10 @@ Keep the key in the host's environment variables. Never put it in the client.
   thumbnail strip and the gallery grid, but the hero is upscaled roughly 1.3× on a
   large monitor and looks slightly soft. Higher-resolution originals would be a
   visible improvement.
-- **No rate limiting.** The `/api/chat` endpoint is open. Before putting this on a
-  public host, add rate limiting per IP, or the endpoint can be used to spend your
-  API credit.
+- **Rate limiting is thin.** `api/chat.js` caps requests per IP per minute, but
+  serverless instances get recycled, so it's a speed bump rather than a quota. If
+  you point the widget at a public proxy, put a durable store or your host's WAF
+  in front of it, or the endpoint can be used to spend your API credit.
 
 ## Where the content came from
 
