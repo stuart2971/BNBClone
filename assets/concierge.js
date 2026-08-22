@@ -153,9 +153,31 @@ function tablesToLists(text) {
   return out.join("\n");
 }
 
+/**
+ * knowledge-base.md is hard-wrapped at 80 columns. The chat bubble renders every
+ * newline as a <br>, so without this a paragraph arrives ragged, broken at the
+ * column the file happened to wrap at. Join wrapped lines back into one line and
+ * keep breaks only where a new block actually starts.
+ */
+function unwrap(text) {
+  var lines = text.split("\n");
+  var out = [];
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i].trim();
+    var prev = out.length ? out[out.length - 1] : "";
+    var startsBlock = /^(?:[-•]\s|\d+[.)]\s|#{1,6}\s|>\s|\*\*|⚠)/.test(line);
+    if (prev && line && !startsBlock) {
+      out[out.length - 1] = prev + " " + line;
+    } else {
+      out.push(line);
+    }
+  }
+  return out.join("\n");
+}
+
 /** Strip dividers and blockquote markers, drop internal guidance paragraphs. */
 function cleanBody(text) {
-  return tablesToLists(text)
+  return unwrap(tablesToLists(text))
     .replace(/^---+\s*$/gm, "")
     .split(/\n\s*\n/)
     .map(function (p) { return p.trim(); })
